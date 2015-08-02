@@ -1,0 +1,59 @@
+body {
+    background: no-repeat url(../images/desktop_laptop.jpg);
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0px;
+    margin: 0px;
+}
+section {
+    padding: 20px 0px 20px 0px;
+}
+header#main-header {
+    background: rgba(0, 0, 0, 0.4);
+    height: 60vh;
+    padding-top: 100px;
+}
+
+header#main-header h1 {
+    font-size: 80px;
+}
+
+header#main-header h4 {
+    color: #eecc66;
+}
+
+header h1, header h2, header h3, header h4 {
+    color: #d7cec7;
+}
+
+section.light, div.light {
+    background: #a3917d;
+}
+
+section.dark, div.dark {
+    background: #584340;
+}
+
+section.skills {
+    width: 400px;
+}
+
+section.dark, section.light, div.dark, div.light {
+    border-top: 1px solid #d7cec7;
+    padding-left: 20px;
+}
+
+.headshot {
+    margin-top: 8%;
+    border: solid 8px #eecc66;
+}
+
+.contact {
+    margin-left: 10px;
+}

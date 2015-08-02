@@ -1,3 +1,15 @@
-/*
-This is empty on purpose! Your code to build the resume will go here.
- */
+(function () {
+    'use strict';
+
+    var work;
+    var projects;
+    var bio;
+    var education;
+
+    if (true) {
+        $('#header').append(HTMLskillsStart);
+        for (var i=0; i < 3; i++) {
+            $('#skills').append(HTMLskills);
+        }
+    }
+})();
