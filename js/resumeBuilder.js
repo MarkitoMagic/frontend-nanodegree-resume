@@ -5,9 +5,9 @@
         Create a new angular app for the resume app.
     */
     angular.module('resumeBuilderApp', []).
-        controller('ResumeBuilderController', ['$http', resumeBuilderController]);
+        controller('ResumeBuilderController', resumeBuilderController);
 
-    function resumeBuilderController($http) {
+    function resumeBuilderController() {
         // store a reference to the controller view model
         var controller = this;
 
