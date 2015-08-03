@@ -169,7 +169,37 @@ function initializeMap() {
 
     // hmmmm, I wonder what this is about...
     google.maps.event.addListener(marker, 'click', function() {
-      // your code goes here!
+        function getMarkerDisplayString(action, who) {
+            return "<br><b>" + action +"</b> here @ " + "<i>" + who + "</i>";
+        }
+
+        var content = "I have: ";
+
+        // adds the single location property from bio to the locations array
+        if (marker.title.indexOf(bio.contacts.location) >= 0) {
+            content+="<br><b>Lived here</b>";
+        }
+
+        // iterates through school locations and appends each location to
+        // the locations array
+        for (var school in education.schools) {
+          if (marker.title.indexOf(education.schools[school].location) >= 0) {
+              content+=getMarkerDisplayString("studied", education.schools[school].name);
+          }
+        }
+
+        // iterates through work locations and appends each location to
+        // the locations array
+        for (var job in work.jobs) {
+          if (marker.title.indexOf(work.jobs[job].location) >= 0) {
+              content+=getMarkerDisplayString("worked", work.jobs[job].employer);
+          };
+        }
+
+        var infowindow = new google.maps.InfoWindow({
+            content: content
+        });
+        infowindow.open(map, marker);
     });
 
     // this is where the pin actually gets added to the map.
@@ -232,11 +262,11 @@ Uncomment the code below when you're ready to implement a Google Map!
 */
 
 // Calls the initializeMap() function when the page loads
-//window.addEventListener('load', initializeMap);
+window.addEventListener('load', initializeMap);
 
 // Vanilla JS way to listen for resizing of the window
 // and adjust map bounds
-//window.addEventListener('resize', function(e) {
-  //Make sure the map bounds get updated on page resize
-//  map.fitBounds(mapBounds);
-//});
+window.addEventListener('resize', function(e) {
+    //Make sure the map bounds get updated on page resize
+     map.fitBounds(mapBounds);
+});

@@ -82,3 +82,15 @@ section.dark, section.light, div.dark, div.light {
     width: 350px;
     height: 250px;
 }
+
+#map {
+  display: block;
+  height: 100%;
+  margin: 0 5%;
+}
+
+#map-div {
+  height: 400px;
+  width: 95%;
+  padding-bottom: 5%;
+}
