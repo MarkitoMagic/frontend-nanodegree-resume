@@ -11,18 +11,26 @@
             "github": "http://github.com/markitomagic",
             "linkedin": "https://www.linkedin.com/in/markallenthompson"
         },
-        "skills": [
-            "Software Development",
-            "JavaScript",
-            "AngularJS",
-            "CSS",
-            "HTML",
-            "Java",
-            "Spring",
-            "Git",
-            "Mercurial",
-            "Database/SQL"
-        ]
+        "skills": {
+            "languages" : [
+                "Software Development",
+                "JavaScript",
+                "AngularJS",
+                "CSS",
+                "HTML",
+                "Java",
+                "Spring",
+            ],
+            "tools": [
+                "Git",
+                "Grunt",
+                "Bower",
+                "Jasmine",
+                "Atom.io",
+                "Mercurial",
+                "Database/SQL"
+            ]
+        }
     },
     "work": {
         "jobs": [
@@ -80,11 +88,11 @@
         ],
         "onlineCourses": [
             {
-                "title": "",
-                "school": "",
+                "title": "Front End Developer Nanodegree",
+                "school": "Udacity.com",
                 "dates": {
-                    "start": "",
-                    "end": ""
+                    "start": "June 2015",
+                    "end": "Present"
                 }
             }
         ]

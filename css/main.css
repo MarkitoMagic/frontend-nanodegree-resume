@@ -1,9 +1,9 @@
 body {
     background: no-repeat url(../images/desktop_laptop.jpg);
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+    background-size: contain;
 }
 
 ul {
@@ -14,6 +14,7 @@ ul {
 section {
     padding: 20px 0px 20px 0px;
 }
+
 header#main-header {
     background: rgba(0, 0, 0, 0.4);
     height: 60vh;
@@ -28,20 +29,22 @@ header#main-header h4 {
     color: #eecc66;
 }
 
-header h1, header h2, header h3, header h4 {
+header h1, header h2, header h3, header h4, header i {
     color: #d7cec7;
 }
+div.light section h3 {
+    color: #333;
+}
 
+div.light section h2 {
+    color: #a3917d;
+}
 section.light, div.light {
-    background: #a3917d;
+    background: #ffe3c4;
 }
 
 section.dark, div.dark {
-    background: #584340;
-}
-
-section.skills {
-    width: 400px;
+    background: #a3917d;
 }
 
 section.dark, section.light, div.dark, div.light {
@@ -51,9 +54,31 @@ section.dark, section.light, div.dark, div.light {
 
 .headshot {
     margin-top: 8%;
-    border: solid 8px #eecc66;
+    border: solid 8px #a3917d;
 }
 
 .contact {
     margin-left: 10px;
+}
+
+.skills-progress-bar {
+    background: #8ab78a;
+    font-size: 20px;
+}
+
+.dark a {
+    color: #ffe3c4;
+}
+
+.light a {
+    color: #333;
+}
+
+.light-text {
+    color: #ffe3c4;
+}
+
+.project-img {
+    width: 350px;
+    height: 250px;
 }

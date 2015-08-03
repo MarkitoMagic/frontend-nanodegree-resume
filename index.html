@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" data-ng-app="resumeBuilderApp">
     <head>
         <meta charset="utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -8,22 +8,25 @@
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
         <link rel="stylesheet" href="css/main.css">
+
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.3/angular.min.js"></script>
+        <script src="http://maps.googleapis.com/maps/api/js?libraries=places"></script>
+        <script src="js/jQuery.js"></script>
+        <script src="js/helper.js"></script>
+        <script src="js/resumeBuilder.js"></script>
     </head>
-    <body>
+    <body data-ng-controller="ResumeBuilderController as resume">
         <header id="main-header" class="row">
-            <h1 class="text-center text-uppercase">Mark Thompson</h1>
-            <h4 class="text-center text-uppercase">build. create. inspire.</h4>
+            <h1 class="text-center text-uppercase">{{resume.bio.name}}</h1>
+            <h4 class="text-center text-uppercase">{{resume.bio.welcomeMessage}}</h4>
         </header>
         <div id="about-me" class="row light">
             <section class="col-md-4">
                 <header>
-                    <h3>About Me</h3>
+                    <h2>About Me</h2>
                 </header>
                 <p class="center-block lead">
-                    Professional Software Engineer with a passion for web technologies.
-                    I enjoy making those around me better. I look to find solutions that
-                    are best for the team and organization. I'm most interested in learning
-                    fron those around me as well as teaching to share what I've learned.
+                    {{resume.bio.aboutMe}}
                 </p>
             </section>
             <div class="col-md-4">
@@ -31,46 +34,106 @@
             </div>
             <section class="col-md-4">
                 <header>
-                    <h3>Contact Me</h3>
+                    <h2>Contact Me</h2>
                 </header>
                 <ul>
-                    <li><i class="fa fa-github fa-2x"></i><span class="contact lead">github.com/markitomagic</span>
-                    <li><i class="fa fa-envelope fa-2x"></i><span class="contact lead">mark dot thompson19 at gmail</span>
-                    <li><i class="fa fa-linkedin fa-2x"></i><span class="contact lead">linkedin.com/markallenthompson</span>
+                    <li><i class="fa fa-github fa-2x"></i><span class="contact lead">{{resume.bio.contacts.github}}</span>
+                    <li><i class="fa fa-envelope fa-2x"></i><span class="contact lead">{{resume.bio.contacts.email}}</span>
+                    <li><i class="fa fa-linkedin fa-2x"></i><span class="contact lead">{{resume.bio.contacts.linkedin}}</span>
                 </ul>
             </section>
         </div>
         <div id="skills" class="row dark">
-            <div style="width: 900px;" class="center-block">
-                <section class="col-md-6 skills">
-                    <header>
-                        <h3>Code</h3>
-                    </header>
-                    <div class="col-md-6">
-                        <span class="lead">AngularJS</span>
-                    </div>
-                    <div class="col-md-6">
-                        <div class="progress">
-                            <div class="progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: 80%;">
-                                8/10
-                            </div>
+            <section class="col-md-6 skills">
+                <header>
+                    <h2><i class="fa fa-code"></i> Languages & Frameworks</h2>
+                </header>
+                <div class="col-md-12">
+                    <div class="progress" data-ng-repeat="language in resume.bio.skills.languages">
+                        <div class="progress-bar skills-progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{language.level}}0%;">
+                            {{language.name}}
                         </div>
                     </div>
-                </section>
-                <section class="col-md-6 skillss">
-                    <header>
-                        <h3>Tools</h3>
-                    </header>
-                    <div class="col-md-6">
-                        <span class="lead">AngularJS</span>
+                </div>
+            </section>
+            <section class="col-md-6 skills">
+                <header>
+                    <h2><i class="fa fa-wrench"></i> Tools</h2>
+                </header>
+                <div class="col-md-12">
+                    <div class="progress" data-ng-repeat="tool in resume.bio.skills.tools">
+                        <div class="progress-bar skills-progress-bar" role="progressbar" aria-valuenow="80" aria-valuemin="0" aria-valuemax="100" style="width: {{tool.level}}0%;">
+                            {{tool.name}}
+                        </div>
                     </div>
-                    <div class="col-md-6">
-                        ******
-                    </div>
-                </section>
-            </div>
+                </div>
+            </section>
         </div>
-        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+        <div id="experience" class="row light">
+            <section class="col-md-6">
+                <header>
+                    <h2>Experience</h2>
+                </header>
+                <div data-ng-repeat="job in resume.work.jobs">
+                    <h3>{{job.employer}} <small class="lead">{{job.title}} / {{job.dates.start}} - {{job.dates.end}} (<i class="fa fa-map-marker"></i> {{job.location}})</small></h3>
+                    <p class="lead">{{job.description}}</p>
+                </div>
+            </section>
+            <section class="col-md-6">
+                <header>
+                    <h2>Where I've Lived and Worked</h2>
+                </header>
+                <div id="map-div">
+                </div>
+            </section>
+        </div>
+        <div id="education" class="row dark">
+            <section class="col-md-6">
+                <header>
+                    <h2>University and College</h2>
+                </header>
+                <div data-ng-repeat="school in resume.education.schools">
+                    <h3>{{school.name}} <small class="lead light-text">{{school.dates.start}} - {{school.dates.end}}
+                        (<i class="fa fa-map-marker"></i> {{school.location}} <i class="fa fa-globe"></i> <a class="lead" data-ng-href="{{school.url}}">Web</a>)</small>
+                    </h3>
+                    <ul>
+                        <li class="lead"> Major: <span data-ng-repeat="major in school.majors">{{major}}<span data-ng-if="!$last">, </span> </span>
+                    </ul>
+                    <ul data-ng-if="school.minors.length != 0">
+                        <li class="lead">Minor: <span data-ng-repeat="minor in school.minors">{{minor}}</span>
+                    </ul>
+                </div>
+            </section>
+            <section class="col-md-6">
+                <header>
+                    <h2>Online Courses</h2>
+                </header>
+                <div data-ng-repeat="course in resume.education.onlineCourses">
+                    <h3>{{course.title}} <small class="lead light-text">{{course.dates.start}} - {{course.dates.end}}
+                        (<i class="fa fa-map-marker"></i> {{course.location}} <a class="lead" data-ng-href="{{course.url}}">Web</a>)</small>
+                    </h3>
+                </div>
+            </section>
+        </div>
+        <div id="projects" class="row light">
+            <section class="col-md-12">
+                <header>
+                    <h2>Projects</h2>
+                </header>
+                <div data-ng-repeat="project in resume.projects.projects">
+                    <h3>{{project.title}} <small class="lead">{{project.dates.start}} - {{project.dates.end}}
+                        (<i class="fa fa-globe"></i> <a class="lead" data-ng-href="{{project.url}}">Web</a>)</small>
+                    </h3>
+                    <p class="lead">{{project.description}}</p>
+                    <div class="col-md-3" data-ng-repeat="image in project.images">
+                        <!-- since we are using angular here but we want valid html we need to put an image data here -->
+                        <img src="data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw=="
+                             class="project-img"
+                             data-ng-src="/{{image}}"
+                             alt="{{image}}">
+                    </div>
+                </div>
+            </section>
+        </div>
     </body>
 </html>
